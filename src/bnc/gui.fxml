@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bnc.Controller">
+   <rowConstraints>
+      <RowConstraints minHeight="-Infinity" percentHeight="5.0" />
+      <RowConstraints percentHeight="90.0" />
+      <RowConstraints minHeight="-Infinity" percentHeight="8.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
+   </columnConstraints>
+   <children>
+      <HBox prefHeight="365.0" prefWidth="600.0" spacing="10.0" GridPane.rowIndex="1">
+         <children>
+            <VBox prefHeight="473.0" prefWidth="212.0">
+               <children>
+                  <Label text="Emails to be sent:" />
+                  <ListView fx:id="listView" prefHeight="456.0" prefWidth="163.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="473.0" prefWidth="456.0">
+               <children>
+                  <HBox prefHeight="52.0" prefWidth="410.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="60.0" text="Email: " textAlignment="CENTER" translateY="5.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin></Label>
+                        <TextField fx:id="email" prefHeight="25.0" prefWidth="330.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin></TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="48.0" prefWidth="410.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="60.0" text="Subject: " textAlignment="CENTER" translateY="5.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin></Label>
+                        <TextField fx:id="emailSubject" prefHeight="25.0" prefWidth="330.0">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin></TextField>
+                     </children>
+                  </HBox>
+                  <TextArea fx:id="emailContent" prefHeight="330.0" prefWidth="407.0" />
+               </children></VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></HBox>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="2">
+        <buttons>
+          <Button alignment="CENTER" mnemonicParsing="false" onAction="#sendEmailButton" prefHeight="32.0" prefWidth="93.0" text="Send All" translateX="-250.0" translateY="-5.0" />
+        </buttons>
+      </ButtonBar>
+      <Label text="BNC International Inc: Auto Emailer" translateY="5.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+   </children>
+</GridPane>
