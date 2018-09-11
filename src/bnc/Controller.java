@@ -1,6 +1,7 @@
 package bnc;
 
 import static bnc.Email.*;
+import static bnc.Main.emails;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,8 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.mail.*;
@@ -31,27 +34,32 @@ public class Controller implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> items = listView.getItems();
 
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
+        for (Map.Entry<String, Email> entry : emails.entrySet()) {
+            items.add(entry.getValue().getClient());
+        }
 
-        email.setText("testEmail");
-        emailSubject.setText("testSubject");
+        email.setText("");
+        emailSubject.setText("");
         emailContent.setWrapText(true);
-        emailContent.setText("test content\ntest content");
+        emailContent.setText("");
     }
 
-    public void sendEmailButton() throws InterruptedException {
+    public void sendEmailButton() {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         alert.setTitle("Information Dialog");
-        alert.setHeaderText("Look, an Information Dialog");
+        alert.setHeaderText("Message");
         alert.setContentText("Emails Sent!");
 
         alert.show();
 
         // sendEmail();
+    }
+
+    @FXML public void handleListClick(MouseEvent arg0) {
+        email.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getClient() + "@email.com");
+        emailSubject.setText(emails.get(listView.getSelectionModel().getSelectedItem()).generateSubject());
+        emailContent.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getEmailContent().toString());
     }
 }

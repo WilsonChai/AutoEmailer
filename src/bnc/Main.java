@@ -8,17 +8,19 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static bnc.Email.*;
 
 public class Main extends Application {
 
+    static Map<String, Email> emails = new HashMap<>();
+
     public static void main(String[] args) throws Exception{
 
-        List<String> list = new ArrayList<>();
-
-        list = generateEmail();
+        emails = generateEmail();
 
         launch(args);
     }

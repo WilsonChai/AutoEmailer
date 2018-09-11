@@ -8,11 +8,20 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class Email {
+
+    private int year = Calendar.getInstance().get(Calendar.YEAR);
+    private static String date;
+    private String client;
+    private String email;
+    private StringBuilder emailContent;
+
+    public Email(String client) {
+        this.client = client;
+        emailContent = new StringBuilder("Invoice No:                      Amount:\n");
+    }
 
     static void sendEmail() {
         // Recipient's email ID needs to be mentioned.
@@ -68,10 +77,11 @@ public class Email {
         }
     }
 
-    static List<String> generateEmail() throws Exception {
+    static Map<String, Email> generateEmail() throws Exception {
 
-        List<String> list = new ArrayList<>();
-        list.add("test");
+        Map<String, Email> emails = new HashMap<>();
+
+        // Reads Excel file sheets and store into cells[][]
         Workbook workbook = Workbook.getWorkbook(new File("test.xls"));
         Sheet sheet = workbook.getSheet(0);
         int maxRows = sheet.getRows();
@@ -87,7 +97,6 @@ public class Email {
         workbook.close();
 
         // Finds the last month's statement and remembers position
-        String date = "";
         int position = 0;
 
         for (int i = 1; i < maxRows; i++) {
@@ -98,41 +107,63 @@ public class Email {
             }
         }
 
-        // Generates all the email contents
-        String currentClient;
+        String currentClient = "";
 
+        // Generates all the email contents
         for (int i = position; i < maxRows; i++) {
 
             if (cells[2][i].getContents() != "" && cells[4][i].getContents() != "") { // name !empty, amount !empty
                 currentClient = cells[2][i].getContents();
-                System.out.println("Subject: EFT Payment Date " + date.replaceAll("-", " "));
-                System.out.println("To customer: " + currentClient);
-                System.out.println("     Invoice No:                       Amount:");
-                System.out.printf("     %-20s%20s\n", cells[3][i].getContents(), cells[4][i].getContents().replaceAll("\"", ""));
+                emails.put(currentClient, new Email(currentClient));
+                emails.get(currentClient).setEmailContent(cells[3][i].getContents(), cells[4][i].getContents().replaceAll("\"", ""));
 
                 if (cells[2][i + 1].getContents() != "" && cells[3][i + 1].getContents() != "") { //  nextName != empty && nextInvoice != empty
-                    System.out.printf("\nTotal Amount Transferred:  %18s\n", cells[4][i].getContents().replaceAll("\"", ""));
-                    System.out.println("Date of Transfer: " + date + "-18");
-                    System.out.println("----------------------------------------------------------------");
+                    emails.get(currentClient).setEmailContent(cells[4][i].getContents().replaceAll("\"", ""));
 
                 } else if (cells[2][i + 1].getContents() == "" && cells[3][i + 1].getContents() == "") {
-                    System.out.printf("\nTotal Amount Transferred:  %18s\n", cells[4][i].getContents().replaceAll("\"", ""));
-                    System.out.println("Date of Transfer: " + date + "-18");
-                    System.out.println("----------------------------------------------------------------");
+                    emails.get(currentClient).setEmailContent(cells[4][i].getContents().replaceAll("\"", ""));
                 }
 
-            } else if (cells[2][i].getContents() == "" && cells[3][i].getContents() != "" && cells[4][i].getContents() != "") { //
-                System.out.printf("     %-20s%20s\n", cells[3][i].getContents(), cells[4][i].getContents().replaceAll("\"", ""));
+            } else if (cells[2][i].getContents() == "" && cells[3][i].getContents() != "" && cells[4][i].getContents() != "") {
+                emails.get(currentClient).setEmailContent(cells[3][i].getContents(), cells[4][i].getContents().replaceAll("\"", ""));
 
                 if (cells[6][i].getContents() != "") {
-                    System.out.printf("\nTotal Amount Transferred:  %18s\n", cells[6][i].getContents().replaceAll("\"", ""));
-                    System.out.println("Date of Transfer: " + date + "-18");
-                    System.out.println("----------------------------------------------------------------");
+                    emails.get(currentClient).setEmailContent(cells[6][i].getContents().replaceAll("\"", ""));
                 }
             }
         }
+        return emails;
+    }
 
-        return list;
+    public String getClient() {
+        return client;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public StringBuilder getEmailContent() {
+        return emailContent;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String generateSubject() {
+        return "EFT payment Date " + date + "-" + year;
+    }
+
+    private void setEmailContent(String invoice, String amount) {
+        Formatter formatter = new Formatter(this.emailContent, Locale.US);
+        formatter.format("%-30s %10s\n", invoice.trim(), amount.trim());
+    }
+
+    private void setEmailContent(String totalAmount) {
+        Formatter formatter = new Formatter(this.emailContent, Locale.US);
+        formatter.format("\nTotal Amount Transferred:  %s\n", totalAmount);
+        formatter.format("Date of Transfer: " + date + "-" + year + "\n");
     }
 }
 
