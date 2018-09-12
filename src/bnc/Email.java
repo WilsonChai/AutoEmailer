@@ -16,11 +16,18 @@ public class Email {
     private static String date;
     private String client;
     private String email;
+    private String subject;
     private StringBuilder emailContent;
 
     public Email(String client) {
         this.client = client;
+        this.email = client + "@email.com";
         emailContent = new StringBuilder("Invoice No:                      Amount:\n");
+    }
+
+
+    public void generateSubject(String date) {
+        this.subject = "EFT payment Date " + date + "-" + year;
     }
 
     static void sendEmail() {
@@ -115,6 +122,7 @@ public class Email {
             if (cells[2][i].getContents() != "" && cells[4][i].getContents() != "") { // name !empty, amount !empty
                 currentClient = cells[2][i].getContents();
                 emails.put(currentClient, new Email(currentClient));
+                emails.get(currentClient).generateSubject(date);
                 emails.get(currentClient).setEmailContent(cells[3][i].getContents(), cells[4][i].getContents().replaceAll("\"", ""));
 
                 if (cells[2][i + 1].getContents() != "" && cells[3][i + 1].getContents() != "") { //  nextName != empty && nextInvoice != empty
@@ -135,35 +143,45 @@ public class Email {
         return emails;
     }
 
-    public String getClient() {
-        return client;
-    }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getClient() {
+        return client;
     }
 
     public StringBuilder getEmailContent() {
         return emailContent;
     }
 
-    public String getDate() {
-        return date;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String generateSubject() {
-        return "EFT payment Date " + date + "-" + year;
-    }
-
-    private void setEmailContent(String invoice, String amount) {
+    public void setEmailContent(String invoice, String amount) {
         Formatter formatter = new Formatter(this.emailContent, Locale.US);
         formatter.format("%-30s %10s\n", invoice.trim(), amount.trim());
     }
 
-    private void setEmailContent(String totalAmount) {
+    public void setEmailContent(String totalAmount) {
         Formatter formatter = new Formatter(this.emailContent, Locale.US);
         formatter.format("\nTotal Amount Transferred:  %s\n", totalAmount);
         formatter.format("Date of Transfer: " + date + "-" + year + "\n");
+    }
+
+    public void setEmailContent(StringBuilder emailContent) {
+        this.emailContent = new StringBuilder(emailContent);
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }
 

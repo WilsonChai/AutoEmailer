@@ -22,26 +22,27 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.util.Properties;
 
-public class Controller implements Initializable{
+public class Controller implements Initializable {
 
-    @FXML private ListView<String> listView;
+    @FXML
+    private ListView<String> listView;
 
-    @FXML private TextField email;
-    @FXML private TextField emailSubject;
-    @FXML private TextArea emailContent = new TextArea();
+    public TextField emailTextField;
+    public TextField emailSubjectTextField;
+    public TextArea emailContentTextField = new TextArea();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> items = listView.getItems();
-
         for (Map.Entry<String, Email> entry : emails.entrySet()) {
             items.add(entry.getValue().getClient());
         }
 
-        email.setText("");
-        emailSubject.setText("");
-        emailContent.setWrapText(true);
-        emailContent.setText("");
+        emailTextField.setText("");
+        emailSubjectTextField.setText("");
+        emailContentTextField.setWrapText(true);
+        emailContentTextField.setText("");
     }
 
     public void sendEmailButton() {
@@ -57,9 +58,17 @@ public class Controller implements Initializable{
         // sendEmail();
     }
 
-    @FXML public void handleListClick(MouseEvent arg0) {
-        email.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getClient() + "@email.com");
-        emailSubject.setText(emails.get(listView.getSelectionModel().getSelectedItem()).generateSubject());
-        emailContent.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getEmailContent().toString());
+    @FXML
+    public void handleListClick(MouseEvent arg0) {
+        emailTextField.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getEmail());
+        emailSubjectTextField.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getSubject());
+        emailContentTextField.setText(emails.get(listView.getSelectionModel().getSelectedItem()).getEmailContent().toString());
+    }
+
+    @FXML
+    public void handleSaveClick() {
+        emails.get(listView.getSelectionModel().getSelectedItem()).setEmail(emailTextField.getText());
+        emails.get(listView.getSelectionModel().getSelectedItem()).setSubject(emailSubjectTextField.getText());
+        emails.get(listView.getSelectionModel().getSelectedItem()).setEmailContent(new StringBuilder(emailContentTextField.getText()));
     }
 }
