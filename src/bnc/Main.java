@@ -4,12 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static bnc.Email.*;
@@ -21,7 +18,8 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception{
 
         emails = generateEmail();
-
+        for(Map.Entry<String, Email> email : emails.entrySet())
+            System.out.println(email.getKey() + ": " + email.getValue().getEmail());
         launch(args);
     }
 
