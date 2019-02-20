@@ -1,5 +1,5 @@
 # Automatic Email Sender
-> Parses an Excel file for email contents and sends them to the clients.
+> This application parses Excel sheets to generate emails and sends them to clients.
 
 ## Built With
 
