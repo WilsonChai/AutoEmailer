@@ -16,8 +16,7 @@ Below is a snapshot of the GUI in use.
 
 On the left, it displays a list of all the emails generated and a Send All button. On the right, The email address, subject, and content is shown. Their contents can be changed by the user by modifying the text fields and pressing the save button or deleting it altogether with the delete button.
 
-
-The emails were generated from these two Excel sheets (data was changed to protect their privacy):
+Below are snippets of the two Excel sheets the email was generated from (their data was changed to protect their privacy):
 
 The client list
 
