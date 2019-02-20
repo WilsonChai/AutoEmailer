@@ -33,7 +33,7 @@ npm test
 
 ## Meta
 
-Wilson Chai – [@WilsonChaiTea](https://twitter.com/WilsonChaiTea) – wilsonchaitea@gmail.com
+Wilson Chai – [@WilsonChaiTea](https://twitter.com/WilsonChaiTea) – WilsonChaiTea@gmail.com
 
 Distributed under the GNU license. See ``LICENSE`` for more information.
 
