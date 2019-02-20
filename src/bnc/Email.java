@@ -36,7 +36,7 @@ public class Email {
         String to = email;
 
         // Sender's email ID needs to be mentioned
-        String from = "secsplz@hotmail.com";
+        String from = "email@email.com";
         final String username = "email@email.com";
         final String password = "password";
 
