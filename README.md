@@ -10,6 +10,8 @@ Automatic Email Sender was built for the CEO of BNC International Inc. to help s
 
 ## Usage example
 
+![Imgur](https://i.imgur.com/6Y8hv35.png)
+
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
 ## Author
