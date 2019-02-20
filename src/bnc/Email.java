@@ -37,8 +37,8 @@ public class Email {
 
         // Sender's email ID needs to be mentioned
         String from = "secsplz@hotmail.com";
-        final String username = "secsplz@hotmail.com";
-        final String password = "137946";
+        final String username = "email@email.com";
+        final String password = "password";
 
         String host = "smtp-mail.outlook.com";
 
