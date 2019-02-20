@@ -16,8 +16,11 @@ Below is a snapshot of the GUI in use.
 
 On the left, it displays a list of all the emails generated and a Send All button. On the right, The email address, subject, and content is shown. Their contents can be changed by the user by modifying the text fields and pressing the save button or deleting it altogether with the delete button.
 
-![Imgur](https://i.imgur.com/6Y8hv35.png)
-![Imgur](https://i.imgur.com/dNNJX2d.png)
+The emails were generated from these two Excel sheets:
+
+[Client List](https://i.imgur.com/6Y8hv35.png) 
+
+[EFT Information](https://i.imgur.com/dNNJX2d.png)
 
 
 A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
