@@ -26,7 +26,6 @@ EFT Information
 
 ![EFT Information](https://i.imgur.com/dNNJX2d.png)
 
-
 ## Author
 
 Wilson Chai – [@WilsonChaiTea](https://twitter.com/WilsonChaiTea) – WilsonChaiTea@gmail.com
