@@ -52,7 +52,7 @@ public class Controller implements Initializable {
         if (alertPrompt.getResult() == ButtonType.YES) {
             alert.show();
             for (Map.Entry<String, Email> e : emails.entrySet()) {
-                sendEmail("nosecsplz@hotmail.com",
+                sendEmail("email@email.com",
                         e.getValue().getSubject(),
                         e.getValue().getEmailContent().toString());
             }
