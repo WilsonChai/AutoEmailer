@@ -18,13 +18,7 @@ On the left, it displays a list of all the emails generated and a Send All butto
 
 Below are snippets of the two Excel sheets the email was generated from (their data was changed to protect their privacy):
 
-The vendor list:
-
-[Client List](https://i.imgur.com/6Y8hv35.png) 
-
-EFT Information:
-
-[EFT Information](https://i.imgur.com/dNNJX2d.png)
+[Vendors List](https://i.imgur.com/6Y8hv35.png) | [EFT Information](https://i.imgur.com/dNNJX2d.png)
 
 ## Author
 
